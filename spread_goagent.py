@@ -82,10 +82,10 @@ try:
             qq_s.sendmail(qq_fromaddr, toaddrs, msg.as_string())
         except (socket.gaierror, socket.error, socket.herror, smtplib.SMTPException), \
                 e:
-            print " *** Your message may not have been sent by QQ server and try gmail again!"
+            print e              
             if 'Mailbox not found' in repr(e):
                 continue
-            print e
+            print " *** Your message may not have been sent by QQ server and try gmail again!"
             try:
                 gmail_s.sendmail(gmail_fromaddr, toaddrs, msg.as_string())
             except (socket.gaierror, socket.error, socket.herror, smtplib.SMTPException), \
