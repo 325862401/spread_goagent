@@ -6,12 +6,12 @@ from mime_gen_both import msg
 import time,random
 
 gmail_server = 'smtp.gmail.com'
-gmail_fromaddr = 'your-id@gmail.com'
-gmail_password = 'xxxxxx'
+gmail_fromaddr = 'shaozheng.wu@gmail.com'
+gmail_password = '663696mm'
 
 qq_server = 'smtp.qq.com'
-qq_fromaddr = 'your_qq@qq.com'
-qq_password = 'xxxxxx'
+qq_fromaddr = '325862401@qq.com'
+qq_password = 'qq325862401'
 initaddr = ''
 cnt = 0
 try:
