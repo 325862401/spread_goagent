@@ -1,8 +1,8 @@
 ﻿通过自动发送邮件传播GoAgent的使用
 =================================
-1.务必设置正确的QQ账户和密码，并在QQ邮箱中开启SMTP服务,参考qq_mail_setting.jpg
+1.修改spread_goagent.py的第 9,10行，务必设置正确的QQ账户和密码，并在QQ邮箱中开启SMTP服务,参考qq_mail_setting.jpg
 
-2.务必设置正确的gmail账户和密码，并且在浏览器中登录google账户，否则邮件login时会失败
+2.修改spread_goagent.py的第13,14行，务必设置正确的gmail账户和密码，并且在浏览器中登录google账户，否则邮件login时会失败
 
 3.直接运行脚本python spread_goagent.py
 
