@@ -35,8 +35,6 @@ def serverstarttls(s):
 
 def smtplogin(server=qq_server,username=qq_fromaddr, password=qq_password):
     try:
-        #You must enable 'smtp' at you QQ mail setting
-        #You must login your gmail by web browser first,otherwise authentication will fail.
         s = smtplib.SMTP(server)
         logging.info("%s start TLS" ,server)
         serverstarttls(s)
@@ -92,7 +90,7 @@ def threadcode():
                 qlock.release()
 
             #logging.info("add a new exist qq num:%s", ','.join(existQQList))
-        while len(existQQList) > 20:
+        while len(existQQList) > 100000:
             time.sleep(1000)
 class runOnceThread:
 
@@ -114,31 +112,27 @@ def getexsitQQlist(num=1):
                 logging.info('t create thread successfully')
         else:
             del t
-    time.sleep(10)
+
     if num < 0:
         return 'Please input a num larger than 0'
     elif num == 0:
         return '325862401'
-    elif num > 10:
+    elif num > 99:
         return 'Please input a num smaller than 100，You get too much'
-    QQlistlen = len(existQQList)
-    retQQlist = []
+
     qlock.acquire()
     try:
-        if  QQlistlen< num:
-            retQQlist = existQQList
-            existQQList = []
-        else:
-            retQQlist = existQQList[:num]
-            existQQList = existQQList[num:]
+        retQQlist = existQQList[:num]
+        existQQList = existQQList[num:]
     finally:
             qlock.release()
 
-    retQQlist.append(str(QQlistlen))
+    if not retQQlist:
+        return 'current QQ list is None'
     return '|'.join(retQQlist)
 def sendmailto(qq_num):
     qq_self    = smtplogin(username='325862401@qq.com', password='qq325862401')
-    #toaddrs = qq_num + '@qq.com'
+
     return checkQQbymail(qq_self,qq_num)
 
 if __name__ == '__main__':
