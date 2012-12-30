@@ -117,7 +117,9 @@ def getexsitQQlist(num=1):
         return 'Please input a num larger than 0'
     elif num == 0:
         return '325862401'
-    elif num > 99:
+    elif num == 100:
+        return str(len(existQQList))
+    elif num > 100:
         return 'Please input a num smaller than 100，You get too much'
 
     qlock.acquire()
