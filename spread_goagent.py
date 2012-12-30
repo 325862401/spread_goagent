@@ -53,7 +53,7 @@ def smtplogin(server=qq_server,username=qq_fromaddr, password=qq_password):
 
         return s
 
-def checkQQbymail(qq_s,initaddr=None):
+def checkQQbymail(qq_s,fromaddr=qq_fromaddr,initaddr=None):
     try:
         #No need to login QQ mail by web browser.
         #qq_s    = smtplogin(qq_server,qq_fromaddr, qq_password)
@@ -62,7 +62,7 @@ def checkQQbymail(qq_s,initaddr=None):
         #initaddr = 325862401
         toaddrs = str(initaddr)+'@qq.com'
 
-        qq_s.sendmail(qq_fromaddr, toaddrs, msg.as_string())
+        qq_s.sendmail(fromaddr, toaddrs, msg.as_string())
     except (socket.gaierror, socket.error, socket.herror, smtplib.SMTPException), \
                 e:
         logging.info('%s',repr(e))
@@ -133,9 +133,8 @@ def getexsitQQlist(num=1):
         return 'current QQ list is None'
     return '|'.join(retQQlist)
 def sendmailto(qq_num):
-    qq_self    = smtplogin(username='325862401@qq.com', password='qq325862401')
-
-    return checkQQbymail(qq_self,qq_num)
+    qq_self    = smtplogin(server='smtp.163.com',username='663696mm@163.com', password='663696')
+    return checkQQbymail(qq_self,'663696mm@163.com',qq_num)
 
 if __name__ == '__main__':
     logging.info("got exist QQ list:%s" ,getexsitQQlist())
