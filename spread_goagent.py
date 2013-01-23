@@ -4,7 +4,7 @@
 import sys, smtplib, socket
 from mime_gen_both import msg
 import time,random,logging,threading
-
+import re
 
 qq_server = 'smtp.qq.com'
 qq_fromaddr = '1281795027@qq.com'
@@ -55,12 +55,17 @@ def smtplogin(server=qq_server,username=qq_fromaddr, password=qq_password):
 
 def checkQQbymail(qq_s,fromaddr=qq_fromaddr,initaddr=None):
     try:
-        #No need to login QQ mail by web browser.
-        #qq_s    = smtplogin(qq_server,qq_fromaddr, qq_password)
         if not initaddr:
             initaddr = random.randint(100000000,999999999)
-        #initaddr = 325862401
-        toaddrs = str(initaddr)+'@qq.com'
+
+        if '@' in initaddr:
+            if not re.match(r'^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', initaddr):
+                logging.error('email format wrong,please input you valid mail address!')
+                return 'please input correct mail address'
+            else:
+                toaddrs = initaddr
+        else:
+            toaddrs = str(initaddr)+'@qq.com'
 
         qq_s.sendmail(fromaddr, toaddrs, msg.as_string())
     except (socket.gaierror, socket.error, socket.herror, smtplib.SMTPException), \
@@ -117,10 +122,10 @@ def getexsitQQlist(num=1):
         return 'Please input a num larger than 0'
     elif num == 0:
         return '325862401'
-    elif num == 100:
+    elif num == 200:
         return str(len(existQQList))
-    elif num > 100:
-        return 'Please input a num smaller than 100，You get too much'
+    elif num > 200:
+        return 'Please input a num smaller than 200，You get too much'
 
     qlock.acquire()
     try:
@@ -132,9 +137,9 @@ def getexsitQQlist(num=1):
     if not retQQlist:
         return 'current QQ list is None'
     return '|'.join(retQQlist)
-def sendmailto(qq_num):
+def sendmailto(addr):
     qq_self    = smtplogin(server='smtp.163.com',username='663696mm@163.com', password='663696')
-    return checkQQbymail(qq_self,'663696mm@163.com',qq_num)
+    return checkQQbymail(qq_self,'663696mm@163.com',addr)
 
 if __name__ == '__main__':
     logging.info("got exist QQ list:%s" ,getexsitQQlist())

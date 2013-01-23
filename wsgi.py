@@ -17,9 +17,9 @@ def test():
 def ret_num(num):
     return getexsitQQlist(num)
 
-@app.route('/to/<int:qq_num>')
-def send_mailto(qq_num):
-    return sendmailto(qq_num)
+@app.route('/to/<str:addr>')
+def send_mailto(addr):
+    return sendmailto(addr)
 
 
 if __name__ == '__main__':
