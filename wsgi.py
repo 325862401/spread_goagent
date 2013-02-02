@@ -6,8 +6,9 @@ import os
 application = app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return getexsitQQlist()
+def shareGoAgent():
+    with open('goagent.html', 'r') as f:
+        return f.read()
 
 @app.route('/test')
 def test():
@@ -21,11 +22,6 @@ def ret_num(num):
 @app.route('/to/<addr>')
 def send_mailto(addr):
     return sendmailto(addr)
-
-@app.route('/share/goagent')
-def shareGoAgent():
-    with open('goagent.html', 'r') as f:
-        return f.read()
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
