@@ -55,7 +55,7 @@ body = MIMEMultipart('alternative')
 #body.attach(genpart(messagetext, 'text/plain'))
 body.attach(genpart(messagehtml, 'text/html'))
 msg.attach(body)
-filelist = ['goagenthome.jpg','IE_set.jpg','ie_con_proxy.jpg','proxy_set.jpg']
-for filename in filelist:
-    msg.attach(attachment(filename))
+#filelist = ['goagenthome.jpg','IE_set.jpg','ie_con_proxy.jpg','proxy_set.jpg']
+#for filename in filelist:
+#    msg.attach(attachment(filename))
 #print msg.as_string()

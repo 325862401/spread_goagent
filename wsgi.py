@@ -7,7 +7,7 @@ application = app = Flask(__name__)
 
 @app.route('/')
 def shareGoAgent():
-    with open('goagent.html', 'r') as f:
+    with open('goagent-home.html', 'r') as f:
         return f.read()
 
 @app.route('/test')
