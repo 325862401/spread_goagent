@@ -56,7 +56,7 @@ def smtplogin(server=qq_server,username=qq_fromaddr, password=qq_password):
 def checkQQbymail(qq_s,fromaddr=qq_fromaddr,initaddr=None):
     try:
         if not initaddr:
-            initaddr = str(random.randint(100000000,999999999))
+            initaddr = str(random.randint(100000000,9999999999))
 
         if '@' in initaddr:
             if not re.match(r'^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', initaddr):
